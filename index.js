@@ -3,7 +3,6 @@ const inquirer = require('inquirer');
 const Department = require('./lib/department');
 const Role = require('./lib/role');
 const Employee = require('./lib/employee');
-//const {DBconnect, DBdisconnect, init} = require('./utils/basePrompt');
 
 db.connect(err => {
     if (err) throw err;
@@ -24,7 +23,7 @@ const init = () => {
             'Update an employee role', 'Update an employee manager',
             'View employees by manager', 'View employees by department',
             'Delete an employee', 'Delete a role', 'Delete a department',
-            'View total utilized budget', 'Exit']
+            'View total utilized budget of a department', 'Exit']
         })
         .then(answer => {
             switch (answer.actionChoice) {
@@ -51,11 +50,11 @@ const init = () => {
                 case 'Delete an employee':
                     return employee.deleteEmployee();
                 case 'Delete a role':
-                    return;
+                    return role.deleteRole();
                 case 'Delete a department':
-                    return;
-                case 'View total utilized budget':
-                    return;
+                    return department.deleteDepartment();
+                case 'View total utilized budget of a department':
+                    return employee.getBudget();
                 case 'Exit':
                     process.exit();
             }
@@ -63,6 +62,7 @@ const init = () => {
         .then(() => init());
 
 };
+
 //DBconnect();
 
 init();
